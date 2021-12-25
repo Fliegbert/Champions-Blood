@@ -317,3 +317,4 @@
 "Assets/Resources/Scripts/BuildingManager.cs"
 "Assets/Resources/Scripts/BuildingPlacer.cs"
 "Assets/Resources/Scripts/Globals.cs"
+"Assets/Resources/Scripts/UIManager.cs"

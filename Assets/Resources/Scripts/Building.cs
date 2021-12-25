@@ -29,6 +29,10 @@ public class Building
         _data = data;
         _currentHealth = data.HP;
 
+        GameObject g = GameObject.Instantiate(Resources.Load($"Prefabs/Units/Beastmasters/Buildings/{_data.Code}")) as GameObject;
+        _transform = g.transform;
+        _placement = BuildingPlacement.VALID;
+
         //list gets filled with the materials when constructor is called
         _materials = new List<Material>();
         foreach (Material material in _transform.Find("Mesh").GetComponent<Renderer>().materials)
@@ -36,11 +40,10 @@ public class Building
             _materials.Add(new Material(material));
         }
 
-        GameObject g = GameObject.Instantiate(Resources.Load($"Assets/Resources/Prefabs/Units/Beastmasters/Buildings{_data.Code}")) as GameObject;
-        _transform = g.transform;
         // for the validity state of the object
-        _placement = BuildingPlacement.VALID;
+
         _buildingManager = g.GetComponent<BuildingManager>();
+        _placement = BuildingPlacement.VALID;
         SetMaterials();
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BuildingPlacer : MonoBehaviour
 {
@@ -10,11 +11,12 @@ public class BuildingPlacer : MonoBehaviour
     private RaycastHit _raycastHit;
     private Vector3 _lastPlacementPosition;
 
+    //Function purpose: setting the phantom building to the choosen building type
+
     //start the phantom building through _PreparePlacedBuilding
-    void Start()
+    public void SelectPlacedBuilding(int buildingDataIndex)
     {
-        //first pick first building type with 0
-        _PreparePlacedBuilding(0);
+        _PreparePlacedBuilding(buildingDataIndex);
     }
 
     //taking in information whether building was choosen or not and is getting executed if building is choosen
@@ -49,7 +51,7 @@ public class BuildingPlacer : MonoBehaviour
                 }
                 _lastPlacementPosition = _raycastHit.point;
 
-                if (_placedBuilding.HasValidPlacement && Input.GetMouseButtonDown(0))
+                if (_placedBuilding.HasValidPlacement && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     _PlaceBuilding();
                 }
@@ -59,10 +61,16 @@ public class BuildingPlacer : MonoBehaviour
 
     //Function purpose: Destroys existing choosen building and equips new one
 
-    //checks if building is picked and destroys it
+    //checks if building is picked and  not fixed and destroys it
     //takes generates new building with argument int from Globals Array and sets the placementposition at the last of scene
     void _PreparePlacedBuilding(int buildingDataIndex)
     {
+
+        if (_placedBuilding != null && !_placedBuilding.IsFixed)
+        {
+            Destroy(_placedBuilding.Transform.gameObject);
+        }
+
         Building building = new Building(
             Globals.BUILDING_DATA[buildingDataIndex]
         );

@@ -52,7 +52,10 @@
      <Compile Include="Assets\Resources\Scripts\BuildingData.cs" />
      <Compile Include="Assets\Resources\Scripts\BuildingManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Building.cs" />
+     <Compile Include="Assets\Resources\Scripts\GameResources.cs" />
      <Compile Include="Assets\Resources\Scripts\Globals.cs" />
+     <Compile Include="Assets\Resources\Scripts\EventManager.cs" />
+     <None Include="Assets\Resources\Shader\ProjectorAdditiveTint.shader" />
  <Reference Include="UnityEngine">
  <HintPath>/home/koolguy/Unity/Hub/Editor/2020.3.24f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

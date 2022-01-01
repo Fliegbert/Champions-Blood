@@ -6,6 +6,8 @@ public class Globals
     // statics are shared across all instances of a class
     public static int TERRAIN_LAYER_MASK = 1 << 3;
 
+    // Selected Units list
+    public static List<UnitManager> SELECTED_UNITS = new List<UnitManager>();
     //instantiate an array of new BuildingData Objects
     public static BuildingData[] BUILDING_DATA = new BuildingData[]
     {

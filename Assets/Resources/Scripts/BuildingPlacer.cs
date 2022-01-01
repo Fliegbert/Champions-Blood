@@ -89,6 +89,7 @@ public class BuildingPlacer : MonoBehaviour
     //Function purpose: Place the building with the help of the Place Function and Set up the same building type as next choosen building
 
     //place the building and keep the same building type
+    //If CanBuy not true, _placedBuilding = null and EventManager triggers events
     void _PlaceBuilding()
     {
         _placedBuilding.Place();
@@ -96,8 +97,9 @@ public class BuildingPlacer : MonoBehaviour
             _PreparePlacedBuilding(_placedBuilding.DataIndex);
         else
             _placedBuilding = null;
-        _uiManager.UpdateResourceTexts();
-        _uiManager.CheckBuildingButtons();
+        // replaced ui interface with emitter which triggers event in UIManager [_uiManager.UpdateResourceTexts();, _uiManager.CheckBuildingButtons();]
+        EventManager.TriggerEvent("UpdateResourceTexts");
+        EventManager.TriggerEvent("CheckBuildingButtons");
     }
 
     //Function purpose: Delete Phantom Building and set the choosen building to none

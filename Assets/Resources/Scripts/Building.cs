@@ -99,6 +99,15 @@ public class Building
         // change building materials
         SetMaterials();
         _transform.GetComponent<BoxCollider>().isTrigger = false;
+        foreach (KeyValuePair<string, int> pair in _data.Cost)
+        {
+            Globals.GAME_RESOURCES[pair.Key].AddAmount(-pair.Value);
+        }
+    }
+
+    public bool CanBuy()
+    {
+        return _data.CanBuy();
     }
 
     public void CheckValidPlacement()

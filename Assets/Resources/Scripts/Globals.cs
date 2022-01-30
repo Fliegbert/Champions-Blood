@@ -9,18 +9,13 @@ public class Globals
     // Selected Units list
     public static List<UnitManager> SELECTED_UNITS = new List<UnitManager>();
     //instantiate an array of new BuildingData Objects
-    public static BuildingData[] BUILDING_DATA = new BuildingData[]
-    {
-        new BuildingData("Hut", 100, new Dictionary<string, int>()
-        {
-          {"gold", 100}
-        })
-    };
+    public static BuildingData[] BUILDING_DATA;
+
     //Function purpose: instantiates Resources and set initial amount. the first string ist the key, Gameresource is the value
     public static Dictionary<string, GameResource> GAME_RESOURCES = new Dictionary<string, GameResource>()
     {   //Dictionary{string, GameResource(string name, int initialAmount)}
-        { "gold", new GameResource("Gold", 300) },
-        { "wood", new GameResource("Wood", 300) },
-        { "stone", new GameResource("Stone", 300) }
+        { "gold", new GameResource("Gold", 200) },
+        { "blood", new GameResource("Blood", 0) },
+        { "bronze", new GameResource("Bronze", 100) }
     };
 }

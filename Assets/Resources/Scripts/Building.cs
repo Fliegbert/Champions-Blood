@@ -7,7 +7,7 @@ public enum BuildingPlacement
     VALID,
     FIXED,
     INVALID
-}
+};
 
 public class Building
 {
@@ -27,9 +27,9 @@ public class Building
     public Building(BuildingData data)
     {
         _data = data;
-        _currentHealth = data.HP;
+        _currentHealth = data.healthpoints;
 
-        GameObject g = GameObject.Instantiate(Resources.Load($"Prefabs/Units/Beastmasters/Buildings/{_data.Code}")) as GameObject;
+        GameObject g = GameObject.Instantiate(data.prefab) as GameObject;
         _transform = g.transform;
         _placement = BuildingPlacement.VALID;
 
@@ -42,7 +42,7 @@ public class Building
 
         // for the validity state of the object
 
-        _buildingManager = g.GetComponent<BuildingManager>();
+        _buildingManager = _transform.GetComponent<BuildingManager>();
         _placement = BuildingPlacement.VALID;
         SetMaterials();
     }
@@ -99,9 +99,9 @@ public class Building
         // change building materials
         SetMaterials();
         _transform.GetComponent<BoxCollider>().isTrigger = false;
-        foreach (KeyValuePair<string, int> pair in _data.Cost)
+        foreach (ResourceValue resource in _data.cost)
         {
-            Globals.GAME_RESOURCES[pair.Key].AddAmount(-pair.Value);
+            Globals.GAME_RESOURCES[resource.code].AddAmount(-resource.amount);
         }
     }
 
@@ -120,10 +120,10 @@ public class Building
 
     //Setting the Getters
     public bool IsFixed { get => _placement == BuildingPlacement.FIXED; }
-    public string Code { get => _data.Code; }
+    public string Code { get => _data.code; }
     public Transform Transform { get => _transform; }
     public int HP { get => _currentHealth; set => _currentHealth = value; }
-    public int MaxHP { get => _data.HP; }
+    public int MaxHP { get => _data.healthpoints; }
     public bool HasValidPlacement { get => _placement == BuildingPlacement.VALID; }
 
     //“computed” property that gives us the index of the abstract building type data instance in the global list
@@ -135,7 +135,7 @@ public class Building
       get {
           for (int i = 0; i < Globals.BUILDING_DATA.Length; i++)
           {
-              if (Globals.BUILDING_DATA[i].Code == _data.Code)
+              if (Globals.BUILDING_DATA[i].code == _data.code)
               {
                   return i;
               }
